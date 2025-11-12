@@ -51,20 +51,42 @@ cc-all: cc-datagen cc-features cc-streaming-features cc-train cc-deploy
 aq-clean:
 	python mlfs/clean_hopsworks_resources.py aq
 
+id ?= 1
+aq-features-clean:
+	python mlfs/clean_hopsworks_resources.py air_quality_$(id)
+	python mlfs/clean_hopsworks_resources.py weather_$(id)
+aq-features-all:
+	ipython notebooks/airquality/1_air_quality_feature_backfill.ipynb -- --id 1
+	ipython notebooks/airquality/1_air_quality_feature_backfill.ipynb -- --id 2
+	ipython notebooks/airquality/1_air_quality_feature_backfill.ipynb -- --id 3
+
 aq-features:
-	ipython notebooks/airquality/1_air_quality_feature_backfill.ipynb
+	ipython notebooks/airquality/1_air_quality_feature_backfill.ipynb -- --id $(id)
 
 aq-train:
-	ipython notebooks/airquality/3_air_quality_training_pipeline.ipynb
+	ipython notebooks/airquality/3_air_quality_training_pipeline.ipynb -- --id $(id)
+
+aq-train-all:
+	ipython notebooks/airquality/3_air_quality_training_pipeline.ipynb -- --id 1
+	ipython notebooks/airquality/3_air_quality_training_pipeline.ipynb -- --id 2
+	ipython notebooks/airquality/3_air_quality_training_pipeline.ipynb -- --id 3
 
 aq-inference:
-	ipython notebooks/airquality/2_air_quality_feature_pipeline.ipynb
-	ipython notebooks/airquality/4_air_quality_batch_inference.ipynb
+	ipython notebooks/airquality/2_air_quality_feature_pipeline.ipynb -- --id $(id)
+	ipython notebooks/airquality/4_air_quality_batch_inference.ipynb -- --id $(id)
+
+aq-inference-all:
+	ipython notebooks/airquality/2_air_quality_feature_pipeline.ipynb -- --id 1
+	ipython notebooks/airquality/4_air_quality_batch_inference.ipynb -- --id 1
+	ipython notebooks/airquality/2_air_quality_feature_pipeline.ipynb -- --id 2
+	ipython notebooks/airquality/4_air_quality_batch_inference.ipynb -- --id 2
+	ipython notebooks/airquality/2_air_quality_feature_pipeline.ipynb -- --id 3
+	ipython notebooks/airquality/4_air_quality_batch_inference.ipynb -- --id 3
 
 aq-llm:
 	ipython notebooks/airquality/5_function_calling.ipynb
 
-aq-all: aq-features aq-train aq-inference
+aq-all: aq-features-all aq-train-all aq-inference-all
 
 titanic-clean:
 	python mlfs/clean_hopsworks_resources.py titanic

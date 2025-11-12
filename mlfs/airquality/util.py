@@ -191,7 +191,7 @@ def plot_air_quality_forecast(city: str, street: str, df: pd.DataFrame, file_pat
 
     # Set the y-axis to a logarithmic scale
     ax.set_yscale('log')
-    ax.set_yticks([0, 10, 25, 50, 100, 250, 500])
+    ax.set_yticks([-1, 10, 25, 50, 100, 250, 500])
     ax.get_yaxis().set_major_formatter(plt.ScalarFormatter())
     ax.set_ylim(bottom=1)
 
