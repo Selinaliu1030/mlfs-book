@@ -17,15 +17,15 @@ We selected lag_1, lag_2, and lag_3 as new features, which means the pm25 data f
 
 ![Fg1](./img/feature_2.png)
 
-Without New Features(Training)
+Without New Features (Training)
 ![Fg2](./img/p3.png)
-With New Features(Training)
+With New Features (Training)
 ![Fg3](./img/p3_2.png)
 
-Without New Features(Inference)
+Without New Features (Inference)
 ![Fg3](./img/cmp.png)
 
-With New Features(Inference)
+With New Features (Inference)
 ![Fg3](./docs/air-quality/assets/img/pm25_hindcast_1day_1.png)
 
 ### Multi-Sensors
@@ -35,7 +35,7 @@ Our designated area is "Helsingborg and Landskorna", and the 3 sensors we chose 
 We give each sensors an id, and put all the information including url, country, city, street, and csv file path onto .env file with the name always ends with "_id".
 
 3. Notebook
-We modify the notebooks for to take sensor id as input through command line. 
+We modify the notebooks for to take sensor id as input through command line. First, we parse the input from the command line and got the attribute "id". Then, 
 4. Make File
 5. .yml file
 
