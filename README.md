@@ -1,49 +1,42 @@
-# mlfs-book
-O'Reilly book - Building Machine Learning Systems with a feature store: batch, real-time, and LLMs
+# ID2223 Lab1
+Chih-Yun Liu (cyliu4@kth.se)
+Hanaè (???@kth.se)
 
+## How to Run
+make aq-features id=x
+make aq-train id=x
+make aq-reference id=x
 
-## ML System Examples
+(x=1 for Drottinggatan; 
+x=2 for Ramshogsvagen;
+x=3 for Larod)
 
+## Implementation
+### Add New Feature (GradeC):
+We selected lag_1, lag_2, and lag_3 as new features, which means the pm25 data from 1 day, 2 days, and 3 days before, into the model. And these new feature help significantly on the accuracy. First, the importance of lag features is high for the model(See Figure1). Also, as we can see in the comparison plot with and without lag features, the plot with lag features align more to the ground truth in both training and inferencing(See Figure 2 and 3).
 
-[Dashboards for Example ML Systems](https://featurestorebook.github.io/mlfs-book/)
+![Fg1](./img/feature_2.png)
 
+Without New Features(Training)
+![Fg2](./img/p3.png)
+With New Features(Training)
+![Fg3](./img/p3_2.png)
 
+Without New Features(Inference)
+![Fg3](./img/cmp.png)
 
+With New Features(Inference)
+![Fg3](./docs/air-quality/assets/img/pm25_hindcast_1day_1.png)
 
-# Run Air Quality Tutorial
+### Multi-Sensors
+1. Select Sensors
+Our designated area is "Helsingborg and Landskorna", and the 3 sensors we chose are Drottinggatan, Ramshogsvagen, Larod.
+2. .env
+We give each sensors an id, and put all the information including url, country, city, street, and csv file path onto .env file with the name always ends with "_id".
 
-See [tutorial instructions here](https://docs.google.com/document/d/1YXfM1_rpo1-jM-lYyb1HpbV9EJPN6i1u6h2rhdPduNE/edit?usp=sharing)
-    # Create a conda or virtual environment for your project
-    conda create -n book 
-    conda activate book
+3. Notebook
+We modify the notebooks for to take sensor id as input through command line. 
+4. Make File
+5. .yml file
 
-    # Install 'uv' and 'invoke'
-    pip install invoke dotenv
-
-    # 'invoke install' installs python dependencies using uv and requirements.txt
-    invoke install
-
-
-## PyInvoke
-
-    invoke aq-backfill
-    invoke aq-features
-    invoke aq-train
-    invoke aq-inference
-    invoke aq-clean
-
-
-
-## Feldera
-
-
-pip install feldera ipython-secrets
-sudo apt-get install python3-secretstorage
-sudo apt-get install gnome-keyring 
-
-mkdir -p /tmp/c.app.hopsworks.ai
-ln -s  /tmp/c.app.hopsworks.ai ~/hopsworks
-docker run -p 8080:8080 \
-  -v ~/hopsworks:/tmp/c.app.hopsworks.ai \
-  --tty --rm -it ghcr.io/feldera/pipeline-manager:latest
 
