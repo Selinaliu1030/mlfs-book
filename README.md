@@ -1,6 +1,6 @@
 # ID2223 Lab1
 Chih-Yun Liu (cyliu4@kth.se)
-Hanaè Ben Makhlouf (???@kth.se)
+Hanaé Ben Makhlouf (hanaebm@kth.se)
 
 ## How to Run
 make aq-features id=x
